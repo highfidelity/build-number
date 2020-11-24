@@ -130,7 +130,7 @@ function main() {
             console.log(`Successfully updated build number to ${nextBuildNumber}`);
             
             //Setting the output and a environment variable to new build number...
-            console.log(`::set-env name=${output_name}::${nextBuildNumber}`);
+            fs.writeFileSync(process.env.GITHUB_ENV, `BUILD_NUMBER=${nextBuildNumber}`);
             console.log(`::set-output name=build_number::${nextBuildNumber}`);
             //Save to file so it can be used for next jobs...
             fs.writeFileSync('BUILD_NUMBER', nextBuildNumber.toString());
